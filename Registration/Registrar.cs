@@ -31,9 +31,7 @@ namespace Shiftless.Common.Registration
         public Registrar(RegistrarInitiazationEventHandler action, bool storesMap = false)
         {
             RegistrarBuilder builder = new(this);
-
             action(builder);
-
             (_registries, _registryNames) = builder.Build();
 
             Initialize();
