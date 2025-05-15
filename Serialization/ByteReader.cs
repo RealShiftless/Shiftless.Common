@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Shiftless.Common.Serialization
@@ -34,11 +32,11 @@ namespace Shiftless.Common.Serialization
             set
             {
                 // If the value is exactly the same we can skip tbh
-                if (value == Position) 
+                if (value == Position)
                     return;
 
                 // If we don't have a file stream, we can just directly set the streams position
-                if(_fileStream == null)
+                if (_fileStream == null)
                 {
                     _stream.Position = value;
                     return;
@@ -49,7 +47,7 @@ namespace Shiftless.Common.Serialization
                 int nextBlockPos = (int)(value / BLOCK_SIZE);
 
                 // If we go to another block we can copy said block to the stream
-                if(curBlockPos != nextBlockPos)
+                if (curBlockPos != nextBlockPos)
                     CopyBlock(nextBlockPos);
 
                 // And here we set the position of the stream to its local position
@@ -97,13 +95,13 @@ namespace Shiftless.Common.Serialization
             long fileLength = Length;
 
             // If the offset is longer than the length we are out of range
-            if(offset >= fileLength)
+            if (offset >= fileLength)
                 throw new ArgumentOutOfRangeException(nameof(offset));
 
             // Get the length of the current block, it might be smaller if we are reaching the end of the file
             long lengthTillEOS = fileLength - offset;
             int length = (int)Math.Min(BLOCK_SIZE, lengthTillEOS);
-            
+
             // If it is smaller or is 0 we are at the EOS which should not happen, throw an error
             if (length <= 0)
                 throw new EndOfStreamException("Unexpected EOS while copying block!");
@@ -156,7 +154,7 @@ namespace Shiftless.Common.Serialization
 
             if (v == -1)
             {
-                if(_fileStream != null)
+                if (_fileStream != null)
                 {
                     CopyNextBlock();
                     return Next();
@@ -174,7 +172,7 @@ namespace Shiftless.Common.Serialization
                 value = Next();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 value = default;
                 return false;
@@ -195,7 +193,7 @@ namespace Shiftless.Common.Serialization
                 value = Peek();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 value = default;
                 return false;
@@ -206,7 +204,7 @@ namespace Shiftless.Common.Serialization
         {
             byte[] buffer = new byte[length];
 
-            for(int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++)
                 buffer[i] = Next();
 
             return buffer;
@@ -239,7 +237,7 @@ namespace Shiftless.Common.Serialization
                 value = NextUInt16();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 _stream.Position = pos;
 
@@ -258,7 +256,7 @@ namespace Shiftless.Common.Serialization
                 value = NextInt16();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 _stream.Position = pos;
 
@@ -386,7 +384,7 @@ namespace Shiftless.Common.Serialization
         {
             StringBuilder value = new();
 
-            while(TryNext(out byte b))
+            while (TryNext(out byte b))
             {
                 if (b == exitCharacter)
                     return value.ToString();
@@ -417,7 +415,7 @@ namespace Shiftless.Common.Serialization
         {
             StringBuilder value = new(length);
 
-            for(int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++)
                 value.Append((char)Next());
 
             return value.ToString();
@@ -431,7 +429,7 @@ namespace Shiftless.Common.Serialization
                 value = NextString(length);
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 Position = pos;
                 value = null;
@@ -475,7 +473,7 @@ namespace Shiftless.Common.Serialization
                 // If we do return
                 if (match)
                 {
-                    if(!skipOver)
+                    if (!skipOver)
                         Position -= pattern.Length;
 
                     return curOffset;
@@ -540,14 +538,14 @@ namespace Shiftless.Common.Serialization
                 data = ReadUntil(pattern, skipOver, false);
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 data = null;
                 return false;
             }
         }
         public bool TryReadUntil([NotNullWhen(true)] out byte[]? data, string pattern, bool skipOver = DEF_SKIP_OVER) => TryReadUntil(out data, Encoding.UTF8.GetBytes(pattern), skipOver);
-        
+
         public byte[] GetRemaining()
         {
             long lengthToEOS = Length - Position;

@@ -60,10 +60,10 @@ namespace Shiftless.Common.Mathematics
 
                 OOBState state = OOBState.None;
 
-                if(maxX > byte.MaxValue)
+                if (maxX > byte.MaxValue)
                     state |= OOBState.Horizontal;
 
-                if(maxY > byte.MaxValue)
+                if (maxY > byte.MaxValue)
                     state |= OOBState.Vertical;
 
                 return state;
@@ -155,33 +155,33 @@ namespace Shiftless.Common.Mathematics
 
         public readonly int DistanceFrom(Rect8 rect, Axis axis)
         {
-            if(axis == Axis.Horizontal)
+            if (axis == Axis.Horizontal)
             {
                 if (Right < rect.Left)
                     return rect.Left - Right;
-                else if(Left > rect.Right)
+                else if (Left > rect.Right)
                     return Left - rect.Right;
             }
             else
             {
-                if(Top < rect.Bottom)
+                if (Top < rect.Bottom)
                     return rect.Bottom - Top;
-                else if(Bottom > rect.Top)
+                else if (Bottom > rect.Top)
                     return Bottom - rect.Top;
             }
 
             return 0;
         }
-        
+
 
 
         // Enum
         [Flags]
         private enum OOBState
         {
-            None       = 0b00,
+            None = 0b00,
             Horizontal = 0b01,
-            Vertical   = 0b10
+            Vertical = 0b10
         }
     }
 

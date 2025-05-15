@@ -89,7 +89,7 @@ namespace Shiftless.Common.Mathematics
             readonly get
             {
 #if DEBUG
-                if((uint)index >= 2)
+                if ((uint)index >= 2)
                     throw new IndexOutOfRangeException($"Tried to access 2 dimensional vector at {index}");
 #endif
 
@@ -104,7 +104,7 @@ namespace Shiftless.Common.Mathematics
 
                 GetElementUnsafe(this, index) = value;
             }
-        } 
+        }
 
 
         // Constructor

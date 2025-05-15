@@ -1,10 +1,5 @@
 ﻿using Shiftless.Common.Serialization;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shiftless.Common.Registration
 {
@@ -50,12 +45,12 @@ namespace Shiftless.Common.Registration
 
             ByteStream stream = new(path);
 
-            while(!stream.IsAtEnd)
+            while (!stream.IsAtEnd)
             {
                 uint mappedId = stream.ReadUInt32();
                 string fullName = XorString(stream.ReadString());
 
-                if(!registrar.TryGetItemId(fullName, out uint actualId))
+                if (!registrar.TryGetItemId(fullName, out uint actualId))
                 {
                     missingItemList.Add(fullName);
                     continue;
@@ -64,7 +59,7 @@ namespace Shiftless.Common.Registration
                 map.Add(mappedId, actualId);
             }
 
-            missingItems = [..missingItemList];
+            missingItems = [.. missingItemList];
             return new(map.AsReadOnly());
         }
 

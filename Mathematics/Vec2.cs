@@ -286,7 +286,7 @@ namespace Shiftless.Common.Mathematics
 
         public override readonly bool Equals(object? obj)
         {
-            if(obj is Vec2 v)
+            if (obj is Vec2 v)
                 return this == v;
 
             return false;

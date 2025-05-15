@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Shiftless.Common.Mathematics
+﻿namespace Shiftless.Common.Mathematics
 {
     public interface ISpatialObject2D
     {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Shiftless.Common.Registration
 {
@@ -80,7 +75,7 @@ namespace Shiftless.Common.Registration
                 registryId = GetRegistryId(name);
                 return true;
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 registryId = default;
                 return false;
@@ -105,7 +100,7 @@ namespace Shiftless.Common.Registration
                 id = GetItemId(fullName);
                 return true;
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 id = default;
                 return false;
@@ -122,7 +117,7 @@ namespace Shiftless.Common.Registration
             return GetRegistry(registryName).GetItem(itemName);
         }
         public T GetItem<T>(string fullName) where T : RegistryItem => (T)GetItem(fullName);
-        
+
         public RegistryItem GetItem(ushort rId, ushort iId) => _registries[rId].GetItem(iId);
         public T GetItem<T>(ushort rId, ushort iId) where T : RegistryItem => (T)GetItem(rId, iId);
 
@@ -133,9 +128,9 @@ namespace Shiftless.Common.Registration
         // Enumeration Func
         public void EnumerateItems(RegistrarEnumerationEventHandler action)
         {
-            foreach(Registry registry in _registries)
+            foreach (Registry registry in _registries)
             {
-                foreach(RegistryItem item in registry.Items)
+                foreach (RegistryItem item in registry.Items)
                 {
                     action(item);
                 }

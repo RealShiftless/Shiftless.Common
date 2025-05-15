@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shiftless.Common.Registration
+﻿namespace Shiftless.Common.Registration
 {
     public sealed class Registry
     {
@@ -75,7 +68,7 @@ namespace Shiftless.Common.Registration
                 id = GetItemId(name);
                 return true;
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 id = default;
                 return false;

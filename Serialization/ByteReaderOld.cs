@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Shiftless.Common.Serialization
 {
@@ -26,10 +21,10 @@ namespace Shiftless.Common.Serialization
         {
             int oldCurrent = _current;
 
-            while(_current < _data.Length)
+            while (_current < _data.Length)
             {
                 bool match = true;
-                for(int i = 0; i < pattern.Length; i++)
+                for (int i = 0; i < pattern.Length; i++)
                 {
                     if (pattern[i] == _data[_current + i])
                         continue;
@@ -40,7 +35,7 @@ namespace Shiftless.Common.Serialization
 
                 if (match)
                 {
-                    if(skipOver)
+                    if (skipOver)
                         _current += pattern.Length;
 
                     return true;
@@ -56,7 +51,7 @@ namespace Shiftless.Common.Serialization
 
         public string NextHeader()
         {
-            byte[] data = _data[_current..(_current+4)];
+            byte[] data = _data[_current..(_current + 4)];
             _current += 4;
             return ByteConverter.ToString(data);
         }
@@ -283,10 +278,10 @@ namespace Shiftless.Common.Serialization
         {
             List<byte> result = [];
 
-            while(_current < _data.Length - pattern.Length)
+            while (_current < _data.Length - pattern.Length)
             {
                 bool match = true;
-                for(int i = 0; i < pattern.Length; i++)
+                for (int i = 0; i < pattern.Length; i++)
                 {
                     if (_data[_current + i] == pattern[i])
                         continue;

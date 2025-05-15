@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shiftless.Common.Serialization
+﻿namespace Shiftless.Common.Serialization
 {
     internal class ByteWriterOld()
     {
@@ -17,7 +11,7 @@ namespace Shiftless.Common.Serialization
             if (header.Length > 4 || header.Length <= 0)
                 throw new Exception("Header must be 5 > Header.Length > 0");
 
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 if (i < header.Length)
                     _bytes.Add((byte)header[i]);
@@ -40,13 +34,13 @@ namespace Shiftless.Common.Serialization
         public void Write(double value) => Write(ByteConverter.GetBytes(value));
         public void Write(string value) => Write(ByteConverter.GetBytes(value));
 
-        public void Write(IEnumerable<int> values)    => values.ToList().ForEach(Write);
-        public void Write(IEnumerable<uint> values)   => values.ToList().ForEach(Write);
-        public void Write(IEnumerable<short> values)  => values.ToList().ForEach(Write);
+        public void Write(IEnumerable<int> values) => values.ToList().ForEach(Write);
+        public void Write(IEnumerable<uint> values) => values.ToList().ForEach(Write);
+        public void Write(IEnumerable<short> values) => values.ToList().ForEach(Write);
         public void Write(IEnumerable<ushort> values) => values.ToList().ForEach(Write);
-        public void Write(IEnumerable<long> values)   => values.ToList().ForEach(Write);
-        public void Write(IEnumerable<ulong> values)  => values.ToList().ForEach(Write);
-        public void Write(IEnumerable<float> values)  => values.ToList().ForEach(Write);
+        public void Write(IEnumerable<long> values) => values.ToList().ForEach(Write);
+        public void Write(IEnumerable<ulong> values) => values.ToList().ForEach(Write);
+        public void Write(IEnumerable<float> values) => values.ToList().ForEach(Write);
         public void Write(IEnumerable<double> values) => values.ToList().ForEach(Write);
         public void Write(IEnumerable<string> values) => values.ToList().ForEach(Write);
 

@@ -1,13 +1,7 @@
-﻿using Shiftless.Common.Mathematics;
-using Shiftless.Common.Serialization;
-using System;
-using System.Collections.Generic;
+﻿using Shiftless.Common.Serialization;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shiftless.Common.Mathematics
 {
@@ -99,7 +93,7 @@ namespace Shiftless.Common.Mathematics
         {
             if (obj is Point8 pV)
                 return Equals(pV);
-            else if(obj is (int x, int y))
+            else if (obj is (int x, int y))
                 return X == x && Y == y;
 
             return false;
@@ -143,6 +137,6 @@ namespace Shiftless.Common.Mathematics
             Y = stream.Read();
         }
 
-        
+
     }
 }

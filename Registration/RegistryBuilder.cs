@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shiftless.Common.Registration
+﻿namespace Shiftless.Common.Registration
 {
     public sealed class RegistryBuilder
     {
@@ -26,7 +20,7 @@ namespace Shiftless.Common.Registration
 
 
         // Func
-        public T Register<T>(string name, T item) where T: RegistryItem
+        public T Register<T>(string name, T item) where T : RegistryItem
         {
             if (_isLocked)
                 throw new InvalidOperationException($"{nameof(RegistryItem)} was locked!");
@@ -40,7 +34,7 @@ namespace Shiftless.Common.Registration
             _items.Add(item);
 
             return item;
-        } 
+        }
 
         internal (RegistryItem[], string[]) Build()
         {

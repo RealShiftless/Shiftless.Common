@@ -1,12 +1,4 @@
-﻿using Shiftless.Common.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shiftless.Common.Mathematics
+﻿namespace Shiftless.Common.Mathematics
 {
     public struct Color565(ushort packedValue)
     {
@@ -58,7 +50,7 @@ namespace Shiftless.Common.Mathematics
             if (packedColor > 0xFFFFFFu)
                 throw new ArgumentException($"Color value out of range! (0x000000 ≤ {PackedValue:x6} ≤ 0xFFFFFF)");
         }
-        
+
 
         // Cast Operators
         public static implicit operator ushort(Color565 color) => color.PackedValue;

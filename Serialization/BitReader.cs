@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Shiftless.Common.Serialization
+﻿namespace Shiftless.Common.Serialization
 {
     public class BitReader
     {
@@ -33,7 +29,7 @@ namespace Shiftless.Common.Serialization
                 throw new ArgumentException("Byte reader can not longer than 32 bits!");
 
             uint v = 0;
-            for(int i = 0; i < bitLength; i++)
+            for (int i = 0; i < bitLength; i++)
             {
                 v <<= 1;
 
@@ -44,6 +40,6 @@ namespace Shiftless.Common.Serialization
             return v;
         }
 
-        
+
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Shiftless.Common.Mathematics
+﻿namespace Shiftless.Common.Mathematics
 {
     public static class MHelp
     {

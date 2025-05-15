@@ -38,7 +38,7 @@ namespace Shiftless.Common.Serialization
         // Func
         public byte Read()
         {
-            if(TryRead(out byte value))
+            if (TryRead(out byte value))
                 return value;
 
             throw new EndOfStreamException("Byte stream has reached EOF!");
@@ -47,7 +47,7 @@ namespace Shiftless.Common.Serialization
         {
             int v = _stream.ReadByte();
 
-            if(v == -1)
+            if (v == -1)
             {
                 value = default;
                 return false;
@@ -73,7 +73,7 @@ namespace Shiftless.Common.Serialization
                 value = Peek();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 value = default;
                 return false;
@@ -115,7 +115,7 @@ namespace Shiftless.Common.Serialization
                 value = ReadUInt16();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 _stream.Position = pos;
 
@@ -134,7 +134,7 @@ namespace Shiftless.Common.Serialization
                 value = ReadInt16();
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 _stream.Position = pos;
 
@@ -262,7 +262,7 @@ namespace Shiftless.Common.Serialization
         {
             StringBuilder value = new();
 
-            while(TryRead(out byte b))
+            while (TryRead(out byte b))
             {
                 if (b == eos)
                     return value.ToString();
@@ -293,7 +293,7 @@ namespace Shiftless.Common.Serialization
         {
             StringBuilder value = new(length);
 
-            for(int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++)
                 value.Append((char)Read());
 
             return value.ToString();
@@ -307,7 +307,7 @@ namespace Shiftless.Common.Serialization
                 value = ReadString(length);
                 return true;
             }
-            catch(EndOfStreamException)
+            catch (EndOfStreamException)
             {
                 Position = pos;
                 value = null;
@@ -327,11 +327,11 @@ namespace Shiftless.Common.Serialization
 
             // We use a rolling buffer so we store a current offset
             int curOffset = 0;
-            while(Position < Length)
+            while (Position < Length)
             {
                 // First check if we are currently in a match :)
                 bool match = true;
-                for(int i = 0; i < pattern.Length; i++)
+                for (int i = 0; i < pattern.Length; i++)
                 {
                     int patternOffset = (curOffset + i) % pattern.Length;
 
@@ -343,7 +343,7 @@ namespace Shiftless.Common.Serialization
                 }
 
                 // If it is a match, rewind to the position where the pattern starts
-                if(match)
+                if (match)
                 {
                     Position -= pattern.Length;
                     return [.. bytes];
@@ -360,7 +360,7 @@ namespace Shiftless.Common.Serialization
             }
 
             // If we get here we did not match the pattern, but if we want to still return said data, we do that here
-            if(returnAtEndOfStream)
+            if (returnAtEndOfStream)
                 return [.. bytes];
 
             // So sad nothing to return, so we throw an error :)
@@ -372,7 +372,7 @@ namespace Shiftless.Common.Serialization
             byte[] buffer = new byte[Remaining];
 
             int i = 0;
-            while(Position < Length)
+            while (Position < Length)
                 buffer[i++] = Read();
 
             return buffer;
